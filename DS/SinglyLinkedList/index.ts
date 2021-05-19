@@ -26,13 +26,14 @@ export class SinglyLinkedList {
     else this.tail.next = node;
 
     this.tail = node;
-    this.length += 1;
+    this.length++;
+
     return this;
   }
 
   pop(): ListNode["value"] | undefined {
     if (this.length === 0) return undefined;
-    this.length -= 1;
+    this.length--;
 
     let node = this.head;
     while (node.next.next) node = node.next;
