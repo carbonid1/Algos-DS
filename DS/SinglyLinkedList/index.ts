@@ -32,13 +32,35 @@ export class SinglyLinkedList {
   }
 
   pop(): ListNode["value"] | undefined {
-    if (this.length === 0) return undefined;
-    this.length--;
+    if (this.length === 0) return;
 
     let node = this.head;
-    while (node.next.next) node = node.next;
-    node.next = null;
-    this.tail = node;
+
+    if (this.head === this.tail) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      while (node.next.next) node = node.next;
+      node.next = null;
+      this.tail = node;
+    }
+
+    this.length--;
+
+    return node.value;
+  }
+
+  shift() {
+    if (this.length === 0) return;
+
+    const node = this.head;
+
+    if (this.head === this.tail) {
+      this.tail = null;
+      this.head = null;
+    } else this.head = node.next;
+
+    this.length--;
 
     return node.value;
   }

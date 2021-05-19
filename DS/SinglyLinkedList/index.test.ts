@@ -45,7 +45,7 @@ test("should add three nodes", () => {
   expect(sll.head.next.next.value).toEqual(thirdNode);
 });
 
-test("should remove and return the last node", () => {
+test("should move the tail back", () => {
   const sll = new SinglyLinkedList();
   const firstNode = 1;
   sll.push(firstNode);
@@ -57,4 +57,40 @@ test("should remove and return the last node", () => {
 
   expect(sll.length).toBe(2);
   expect(sll.tail.value).toBe(secondNode);
+});
+
+test("should pop the last node", () => {
+  const sll = new SinglyLinkedList();
+  const firstNode = 1;
+  sll.push(firstNode);
+  sll.pop();
+
+  expect(sll.length).toBe(0);
+  expect(sll.tail).toBe(null);
+  expect(sll.head).toBe(null);
+});
+
+test("should move the head forward", () => {
+  const sll = new SinglyLinkedList();
+  const firstNode = 1;
+  sll.push(firstNode);
+  const secondNode = 2;
+  sll.push(secondNode);
+  const thirdNode = 3;
+  sll.push(thirdNode);
+  sll.shift();
+
+  expect(sll.length).toBe(2);
+  expect(sll.head.value).toBe(secondNode);
+});
+
+test("should shift the single node", () => {
+  const sll = new SinglyLinkedList();
+  const firstNode = 1;
+  sll.push(firstNode);
+  sll.shift();
+
+  expect(sll.length).toBe(0);
+  expect(sll.head).toBe(null);
+  expect(sll.tail).toBe(null);
 });
