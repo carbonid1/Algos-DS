@@ -44,3 +44,17 @@ test("should add three nodes", () => {
   expect(sll.head.next.value).toEqual(secondNode);
   expect(sll.head.next.next.value).toEqual(thirdNode);
 });
+
+test("should remove and return the last node", () => {
+  const sll = new SinglyLinkedList();
+  const firstNode = 1;
+  sll.push(firstNode);
+  const secondNode = 2;
+  sll.push(secondNode);
+  const thirdNode = 3;
+  sll.push(thirdNode);
+  sll.pop();
+
+  expect(sll.length).toBe(2);
+  expect(sll.tail.value).toBe(secondNode);
+});
