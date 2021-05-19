@@ -19,8 +19,12 @@ export class SinglyLinkedList {
     this.length = 0;
   }
 
+  private createNode(value) {
+    return new ListNode(value);
+  }
+
   push(value) {
-    const node = new ListNode(value);
+    const node = this.createNode(value);
 
     if (this.head === null) this.head = node;
     else this.tail.next = node;
@@ -31,7 +35,7 @@ export class SinglyLinkedList {
     return this;
   }
 
-  pop(): ListNode["value"] | undefined {
+  pop() {
     if (this.length === 0) return;
 
     let node = this.head;
@@ -63,5 +67,17 @@ export class SinglyLinkedList {
     this.length--;
 
     return node.value;
+  }
+
+  unshift(value) {
+    const node = this.createNode(value);
+
+    if (this.head === null) this.tail = node;
+    else node.next = this.head;
+
+    this.head = node;
+    this.length++;
+
+    return this;
   }
 }
