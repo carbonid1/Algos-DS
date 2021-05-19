@@ -34,11 +34,11 @@ export class SinglyLinkedList {
     if (this.length === 0) return undefined;
     this.length -= 1;
 
-    let nextTail = this.head;
-    while (nextTail.next.next) nextTail = nextTail.next;
-    nextTail.next = null;
-    this.tail = nextTail;
+    let node = this.head;
+    while (node.next.next) node = node.next;
+    node.next = null;
+    this.tail = node;
 
-    return nextTail.value;
+    return node.value;
   }
 }
