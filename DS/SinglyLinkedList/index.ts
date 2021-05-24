@@ -113,4 +113,16 @@ export class SinglyLinkedList {
     }
     return true;
   }
+
+  remove(index: number): ListNode["value"] | null {
+    if (index < 0 || index >= this.length) return null;
+    else if (index === 0) return this.shift();
+    else {
+      const prevNode = this.get(index - 1);
+      const nodeToRemove = prevNode.next;
+      prevNode.next = nodeToRemove.next;
+      this.length--;
+      return nodeToRemove.value;
+    }
+  }
 }

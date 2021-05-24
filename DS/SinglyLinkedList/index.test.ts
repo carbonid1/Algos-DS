@@ -223,3 +223,53 @@ test("shouldn't insert a node if index not exist", () => {
   expect(sll.length).toBe(2);
   expect(sll.get(404)).toBe(null);
 });
+
+test("should remove at the end", () => {
+  const sll = new SinglyLinkedList();
+  const foo = "foo";
+  const bar = "bar";
+  const index = 1;
+  sll.push(foo);
+  sll.push(bar);
+  sll.remove(index);
+
+  expect(sll.length).toBe(1);
+  expect(sll.get(index)).toBe(null);
+});
+
+test("should remove at the start", () => {
+  const sll = new SinglyLinkedList();
+  const foo = "foo";
+  const bar = "bar";
+  const index = 0;
+  sll.push(foo);
+  sll.push(bar);
+  sll.remove(index);
+
+  expect(sll.length).toBe(1);
+  expect(sll.get(index).value).toBe(bar);
+});
+
+test("should remove in the middle", () => {
+  const sll = new SinglyLinkedList();
+  const foo = "foo";
+  const bar = "bar";
+  const index = 1;
+  sll.push("Let's go");
+  sll.push(foo);
+  sll.push(bar);
+  sll.remove(index);
+
+  expect(sll.length).toBe(2);
+  expect(sll.get(index).value).toBe(bar);
+});
+
+test("shouldn't remove if index doesn't exist", () => {
+  const sll = new SinglyLinkedList();
+  sll.push("Let's go");
+  sll.push("foo");
+  sll.push("bar");
+  sll.remove(404);
+
+  expect(sll.length).toBe(3);
+});
