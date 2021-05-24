@@ -80,4 +80,16 @@ export class SinglyLinkedList {
 
     return this;
   }
+
+  get(index): ListNode | null {
+    if (index < 0 || index >= this.length) return null;
+
+    let count = 0;
+    let node = this.head;
+    while (count !== index) {
+      count++;
+      node = node.next;
+    }
+    return node;
+  }
 }

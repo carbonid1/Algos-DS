@@ -130,3 +130,21 @@ test("should unshift three nodes", () => {
   expect(sll.head.next.value).toBe(secondNode);
   expect(sll.tail.value).toBe(firstNode);
 });
+
+test("should move the tail back", () => {
+  const sll = new SinglyLinkedList();
+  const firstNode = 1;
+  sll.push(firstNode);
+  const secondNode = 2;
+  sll.push(secondNode);
+  const thirdNode = 3;
+  sll.push(thirdNode);
+  const fourthNode = 4;
+  sll.push(fourthNode);
+
+  expect(sll.length).toBe(4);
+  // expect(sll.get(-1)).toBe(null);
+  expect(sll.get(4)).toBe(null);
+  // expect(sll.get(0).value).toBe(firstNode);
+  // expect(sll.get(3).value).toBe(fourthNode);
+});
