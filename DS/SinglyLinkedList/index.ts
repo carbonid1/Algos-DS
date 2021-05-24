@@ -125,4 +125,17 @@ export class SinglyLinkedList {
       return nodeToRemove.value;
     }
   }
+
+  reverse() {
+    const prevHead = this.head;
+    const prevTail = this.tail;
+    this.tail = { value: prevHead?.value, next: null };
+    this.head = { value: prevTail?.value, next: this.tail };
+
+    let node = prevHead?.next;
+    while (node?.next) {
+      this.head.next = { value: node.value, next: this.head.next };
+      node = node.next;
+    }
+  }
 }

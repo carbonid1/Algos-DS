@@ -273,3 +273,38 @@ test("shouldn't remove if index doesn't exist", () => {
 
   expect(sll.length).toBe(3);
 });
+
+test("should reverse the list", () => {
+  const sll = new SinglyLinkedList();
+  const xyz = "xyz";
+  const hello = "hello";
+  const foo = "foo";
+  const bar = "bar";
+  sll.push(xyz);
+  sll.push(hello);
+  sll.push(foo);
+  sll.push(bar);
+  sll.reverse();
+
+  expect(sll.get(0).value).toBe(bar);
+  expect(sll.get(1).value).toBe(foo);
+  expect(sll.get(2).value).toBe(hello);
+  expect(sll.get(3).value).toBe(xyz);
+  expect(sll.get(3).next).toBe(null);
+});
+
+test("should reverse the list with a single item", () => {
+  const sll = new SinglyLinkedList();
+  const xyz = "xyz";
+  sll.push(xyz);
+  sll.reverse();
+
+  expect(sll.get(0).value).toBe(xyz);
+});
+
+test("should reverse an empty list", () => {
+  const sll = new SinglyLinkedList();
+  sll.reverse();
+
+  expect(sll.length).toBe(0);
+});
