@@ -92,4 +92,25 @@ export class SinglyLinkedList {
     }
     return node;
   }
+
+  set(value, index = 0): boolean {
+    const node = this.get(index);
+    const isNodeExist = node !== null;
+    if (isNodeExist) node.value = value;
+    return isNodeExist;
+  }
+
+  insert(value, index = 0): boolean {
+    if (index < 0 || index > this.length) return false;
+    else if (index === 0) this.unshift(value);
+    else if (index === this.length) this.push(value);
+    else {
+      const newNode = this.createNode(value);
+      const prevNode = this.get(index - 1);
+      newNode.next = prevNode.next;
+      prevNode.next = newNode;
+      this.length++;
+    }
+    return true;
+  }
 }

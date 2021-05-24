@@ -131,7 +131,7 @@ test("should unshift three nodes", () => {
   expect(sll.tail.value).toBe(firstNode);
 });
 
-test("should move the tail back", () => {
+test("should get a correct node", () => {
   const sll = new SinglyLinkedList();
   const firstNode = 1;
   sll.push(firstNode);
@@ -143,8 +143,83 @@ test("should move the tail back", () => {
   sll.push(fourthNode);
 
   expect(sll.length).toBe(4);
-  // expect(sll.get(-1)).toBe(null);
+  expect(sll.get(-1)).toBe(null);
   expect(sll.get(4)).toBe(null);
-  // expect(sll.get(0).value).toBe(firstNode);
-  // expect(sll.get(3).value).toBe(fourthNode);
+  expect(sll.get(0).value).toBe(firstNode);
+  expect(sll.get(3).value).toBe(fourthNode);
+});
+
+test("should set a correct node", () => {
+  const sll = new SinglyLinkedList();
+  const firstNode = 1;
+  const secondNode = 2;
+  const thirdNode = 3;
+  const newSecondNode = 4;
+  sll.push(firstNode);
+  sll.push(secondNode);
+  sll.push(thirdNode);
+  sll.set(newSecondNode, 1);
+
+  expect(sll.get(1).value).toBe(newSecondNode);
+});
+
+test("shouldn't set a node if index not exist", () => {
+  const sll = new SinglyLinkedList();
+  const firstNode = 1;
+  const secondNode = 2;
+  const thirdNode = 3;
+  sll.push(firstNode);
+  sll.push(secondNode);
+  sll.set(thirdNode, 2);
+
+  expect(sll.get(2)).toBe(null);
+});
+
+test("should insert a node at the correct position", () => {
+  const sll = new SinglyLinkedList();
+  const foo = "foo";
+  const bar = "bar";
+  sll.push("Let's go");
+  sll.push(foo);
+  sll.insert(bar, 1);
+
+  expect(sll.length).toBe(3);
+  expect(sll.get(1).value).toBe(bar);
+  expect(sll.get(2).value).toBe(foo);
+});
+
+test("should insert at 0 index", () => {
+  const sll = new SinglyLinkedList();
+  const foo = "foo";
+  const bar = "bar";
+  sll.push(foo);
+  sll.insert(bar, 0);
+
+  expect(sll.length).toBe(2);
+  expect(sll.get(0).value).toBe(bar);
+  expect(sll.get(1).value).toBe(foo);
+});
+
+test("should insert at the end", () => {
+  const sll = new SinglyLinkedList();
+  const foo = "foo";
+  const bar = "bar";
+  sll.push("Hello World");
+  sll.push(foo);
+  sll.insert(bar, 2);
+
+  expect(sll.length).toBe(3);
+  expect(sll.get(2).value).toBe(bar);
+});
+
+test("shouldn't insert a node if index not exist", () => {
+  const sll = new SinglyLinkedList();
+  const foo = "foo";
+  const bar = "bar";
+  sll.push("Let's go");
+  sll.push(foo);
+  sll.insert(bar, 404);
+
+  expect(sll.length).toBe(2);
+  expect(sll.get(404)).toBe(null);
 });
