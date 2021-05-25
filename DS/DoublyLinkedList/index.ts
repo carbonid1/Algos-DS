@@ -78,7 +78,10 @@ export class DoublyLinkedList {
     const node = this.createNode(value);
 
     if (this.head === null) this.tail = node;
-    else node.next = this.head;
+    else {
+      node.next = this.head;
+      this.head.prev = node;
+    }
 
     this.head = node;
     this.length++;

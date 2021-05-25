@@ -1,5 +1,7 @@
 import { DoublyLinkedList } from "./index";
 
+const nodes = { a: "A", b: "B", c: "C" };
+
 test("should create a list", () => {
   const list = new DoublyLinkedList();
 
@@ -98,41 +100,43 @@ test("should shift the single node", () => {
   expect(list.tail).toBe(null);
 });
 
-// test("should unshift a single node", () => {
-//   const list = new DoublyLinkedList();
-//   const firstNode = 1;
-//   list.unshift(firstNode);
+describe("unshift", () => {
+  it("adds a single node", () => {
+    const list = new DoublyLinkedList();
+    list.unshift(nodes.a);
 
-//   expect(list.length).toBe(1);
-//   expect(list.head.value).toBe(firstNode);
-//   expect(list.tail.value).toBe(firstNode);
-// });
+    expect(list.length).toBe(1);
+    expect(list.head.value).toBe(nodes.a);
+    expect(list.tail.value).toBe(nodes.a);
+    expect(list.head.prev).toBe(null);
+    expect(list.head.next).toBe(null);
+  });
 
-// test("should unshift two nodes", () => {
-//   const list = new DoublyLinkedList();
-//   const firstNode = 1;
-//   const secondNode = 2;
-//   list.unshift(firstNode);
-//   list.unshift(secondNode);
+  it("adds two nodes", () => {
+    const list = new DoublyLinkedList();
+    list.unshift(nodes.a);
+    list.unshift(nodes.b);
 
-//   expect(list.length).toBe(2);
-//   expect(list.head.value).toBe(secondNode);
-//   expect(list.tail.value).toBe(firstNode);
-// });
+    expect(list.length).toBe(2);
+    expect(list.head.value).toBe(nodes.b);
+    expect(list.tail.value).toBe(nodes.a);
+    expect(list.head.next.value).toBe(nodes.a);
+    expect(list.tail.prev.value).toBe(nodes.b);
+  });
 
-// test("should unshift three nodes", () => {
-//   const list = new DoublyLinkedList();
-//   const firstNode = 1;
-//   const secondNode = 2;
-//   const thirdNode = 3;
-//   list.unshift(firstNode);
-//   list.unshift(secondNode);
-//   list.unshift(thirdNode);
+  it("adds three nodes", () => {
+    const list = new DoublyLinkedList();
+    list.unshift(nodes.a);
+    list.unshift(nodes.b);
+    list.unshift(nodes.c);
 
-//   expect(list.head.value).toBe(thirdNode);
-//   expect(list.head.next.value).toBe(secondNode);
-//   expect(list.tail.value).toBe(firstNode);
-// });
+    expect(list.length).toBe(3);
+    expect(list.head.value).toBe(nodes.c);
+    expect(list.tail.value).toBe(nodes.a);
+    expect(list.head.next.value).toBe(nodes.b);
+    expect(list.tail.prev.value).toBe(nodes.b);
+  });
+});
 
 // test("should get a correct node", () => {
 //   const list = new DoublyLinkedList();
