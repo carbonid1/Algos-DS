@@ -124,9 +124,11 @@ export class DoublyLinkedList {
     else if (index === this.length) this.push(value);
     else {
       const newNode = this.createNode(value);
-      const prevNode = this.get(index - 1);
-      newNode.next = prevNode.next;
-      prevNode.next = newNode;
+      const prevNode = this.get(index);
+      newNode.next = prevNode;
+      newNode.prev = prevNode.prev;
+      prevNode.prev.next = newNode;
+      prevNode.prev = newNode;
       this.length++;
     }
     return true;

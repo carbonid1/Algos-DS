@@ -141,88 +141,82 @@ describe("get", () => {
   });
 });
 
-// test("should set a correct node", () => {
-//   const list = new DoublyLinkedList();
-//   const nodes.a = 1;
-//   const nodes.b = 2;
-//   const nodes.c = 3;
-//   const newnodes.b = 4;
-//   list.push(nodes.a);
-//   list.push(nodes.b);
-//   list.push(nodes.c);
-//   list.set(newnodes.b, 1);
+describe("set", () => {
+  it("changes the correct node", () => {
+    const list = new DoublyLinkedList();
+    list.push(nodes.a);
+    list.push(nodes.b);
+    list.push(nodes.c);
+    list.set(nodes.d, 1);
+    expect(list.get(1).value).toBe(nodes.d);
+  });
 
-//   expect(list.get(1).value).toBe(newnodes.b);
-// });
+  it("doesn't change a node if index doesn't exist", () => {
+    const list = new DoublyLinkedList();
+    const nonexistentIndex = 404;
+    list.push(nodes.a);
+    list.push(nodes.b);
+    list.set(nodes.c, nonexistentIndex);
+    expect(list.get(nonexistentIndex)).toBe(null);
+  });
+});
 
-// test("shouldn't set a node if index not exist", () => {
-//   const list = new DoublyLinkedList();
-//   const nodes.a = 1;
-//   const nodes.b = 2;
-//   const nodes.c = 3;
-//   list.push(nodes.a);
-//   list.push(nodes.b);
-//   list.set(nodes.c, 2);
+describe("insert", () => {
+  it("inserts at the correct position", () => {
+    const list = new DoublyLinkedList();
+    list.push(nodes.a);
+    list.push(nodes.b);
+    list.insert(nodes.c, 1);
 
-//   expect(list.get(2)).toBe(null);
-// });
+    expect(list.length).toBe(3);
+    expect(list.get(0).value).toBe(nodes.a);
+    expect(list.get(0).next.value).toBe(nodes.c);
+    expect(list.get(1).value).toBe(nodes.c);
+    expect(list.get(1).prev.value).toBe(nodes.a);
+    expect(list.get(1).next.value).toBe(nodes.b);
+    expect(list.get(2).value).toBe(nodes.b);
+    expect(list.get(2).prev.value).toBe(nodes.c);
+  });
 
-// test("should insert a node at the correct position", () => {
-//   const list = new DoublyLinkedList();
-//   const foo = "foo";
-//   const bar = "bar";
-//   list.push("Let's go");
-//   list.push(foo);
-//   list.insert(bar, 1);
+  test("should insert at 0 index", () => {
+    const list = new DoublyLinkedList();
+    list.push(nodes.b);
+    list.insert(nodes.a, 0);
 
-//   expect(list.length).toBe(3);
-//   expect(list.get(1).value).toBe(bar);
-//   expect(list.get(2).value).toBe(foo);
-// });
+    expect(list.length).toBe(2);
+    expect(list.get(0).value).toBe(nodes.a);
+    expect(list.get(1).value).toBe(nodes.b);
+  });
 
-// test("should insert at 0 index", () => {
-//   const list = new DoublyLinkedList();
-//   const foo = "foo";
-//   const bar = "bar";
-//   list.push(foo);
-//   list.insert(bar, 0);
+  test("should insert at the end", () => {
+    const list = new DoublyLinkedList();
+    list.push(nodes.c);
+    list.push(nodes.b);
+    list.insert(nodes.a, 2);
 
-//   expect(list.length).toBe(2);
-//   expect(list.get(0).value).toBe(bar);
-//   expect(list.get(1).value).toBe(foo);
-// });
+    expect(list.length).toBe(3);
+    expect(list.get(2).value).toBe(nodes.a);
+  });
 
-// test("should insert at the end", () => {
-//   const list = new DoublyLinkedList();
-//   const foo = "foo";
-//   const bar = "bar";
-//   list.push("Hello World");
-//   list.push(foo);
-//   list.insert(bar, 2);
+  test("shouldn't insert a node if index not exist", () => {
+    const list = new DoublyLinkedList();
+    const nonexistentIndex = 404;
+    list.push(nodes.c);
+    list.push(nodes.b);
+    list.insert(nodes.a, nonexistentIndex);
 
-//   expect(list.length).toBe(3);
-//   expect(list.get(2).value).toBe(bar);
-// });
-
-// test("shouldn't insert a node if index not exist", () => {
-//   const list = new DoublyLinkedList();
-//   const foo = "foo";
-//   const bar = "bar";
-//   list.push("Let's go");
-//   list.push(foo);
-//   list.insert(bar, 404);
-
-//   expect(list.length).toBe(2);
-//   expect(list.get(404)).toBe(null);
-// });
+    expect(list.length).toBe(2);
+    expect(list.get(nonexistentIndex)).toBe(null);
+  });
+});
 
 // test("should remove at the end", () => {
 //   const list = new DoublyLinkedList();
-//   const foo = "foo";
-//   const bar = "bar";
+//   const nodes.b = "nodes.b";
+//   const nodes.a = "nodes.a";
 //   const index = 1;
-//   list.push(foo);
-//   list.push(bar);
+//   list.push(nodes.b);
+//   list.push(nodes.a);
 //   list.remove(index);
 
 //   expect(list.length).toBe(1);
@@ -231,36 +225,36 @@ describe("get", () => {
 
 // test("should remove at the start", () => {
 //   const list = new DoublyLinkedList();
-//   const foo = "foo";
-//   const bar = "bar";
+//   const nodes.b = "nodes.b";
+//   const nodes.a = "nodes.a";
 //   const index = 0;
-//   list.push(foo);
-//   list.push(bar);
+//   list.push(nodes.b);
+//   list.push(nodes.a);
 //   list.remove(index);
 
 //   expect(list.length).toBe(1);
-//   expect(list.get(index).value).toBe(bar);
+//   expect(list.get(index).value).toBe(nodes.a);
 // });
 
 // test("should remove in the middle", () => {
 //   const list = new DoublyLinkedList();
-//   const foo = "foo";
-//   const bar = "bar";
+//   const nodes.b = "nodes.b";
+//   const nodes.a = "nodes.a";
 //   const index = 1;
 //   list.push("Let's go");
-//   list.push(foo);
-//   list.push(bar);
+//   list.push(nodes.b);
+//   list.push(nodes.a);
 //   list.remove(index);
 
 //   expect(list.length).toBe(2);
-//   expect(list.get(index).value).toBe(bar);
+//   expect(list.get(index).value).toBe(nodes.a);
 // });
 
 // test("shouldn't remove if index doesn't exist", () => {
 //   const list = new DoublyLinkedList();
 //   list.push("Let's go");
-//   list.push("foo");
-//   list.push("bar");
+//   list.push("nodes.b");
+//   list.push("nodes.a");
 //   list.remove(404);
 
 //   expect(list.length).toBe(3);
@@ -270,16 +264,16 @@ describe("get", () => {
 //   const list = new DoublyLinkedList();
 //   const xyz = "xyz";
 //   const hello = "hello";
-//   const foo = "foo";
-//   const bar = "bar";
+//   const nodes.b = "nodes.b";
+//   const nodes.a = "nodes.a";
 //   list.push(xyz);
 //   list.push(hello);
-//   list.push(foo);
-//   list.push(bar);
+//   list.push(nodes.b);
+//   list.push(nodes.a);
 //   list.reverse();
 
-//   expect(list.get(0).value).toBe(bar);
-//   expect(list.get(1).value).toBe(foo);
+//   expect(list.get(0).value).toBe(nodes.a);
+//   expect(list.get(1).value).toBe(nodes.b);
 //   expect(list.get(2).value).toBe(hello);
 //   expect(list.get(3).value).toBe(xyz);
 //   expect(list.get(3).next).toBe(null);
