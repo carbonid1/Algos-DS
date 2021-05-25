@@ -92,12 +92,22 @@ export class DoublyLinkedList {
   get(index): ListNode | null {
     if (index < 0 || index >= this.length) return null;
 
-    let count = 0;
-    let node = this.head;
-    while (count !== index) {
-      count++;
-      node = node.next;
+    if (index >= this.length / 2) {
+      let count = this.length - 1;
+      var node = this.tail;
+      while (count !== index) {
+        count--;
+        node = node.prev;
+      }
+    } else {
+      let count = 0;
+      var node = this.head;
+      while (count !== index) {
+        count++;
+        node = node.next;
+      }
     }
+
     return node;
   }
 

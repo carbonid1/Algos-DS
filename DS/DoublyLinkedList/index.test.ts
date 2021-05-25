@@ -1,6 +1,6 @@
 import { DoublyLinkedList } from "./index";
 
-const nodes = { a: "A", b: "B", c: "C" };
+const nodes = { a: "A", b: "B", c: "C", d: "D" };
 
 test("should create a list", () => {
   const list = new DoublyLinkedList();
@@ -12,62 +12,52 @@ test("should create a list", () => {
 
 test("should add a single node", () => {
   const list = new DoublyLinkedList();
-  const firstNode = 1;
-  list.push(firstNode);
+  list.push(nodes.a);
 
   expect(list.length).toEqual(1);
-  expect(list.head.value).toEqual(firstNode);
-  expect(list.tail.value).toEqual(firstNode);
+  expect(list.head.value).toEqual(nodes.a);
+  expect(list.tail.value).toEqual(nodes.a);
 });
 
 test("should add two nodes", () => {
   const list = new DoublyLinkedList();
-  const firstNode = 1;
-  list.push(firstNode);
-  const secondNode = 2;
-  list.push(secondNode);
+  list.push(nodes.a);
+  list.push(nodes.b);
 
   expect(list.length).toEqual(2);
   expect(list.head.prev).toEqual(null);
-  expect(list.head.next.value).toEqual(secondNode);
-  expect(list.tail.prev.value).toEqual(firstNode);
+  expect(list.head.next.value).toEqual(nodes.b);
+  expect(list.tail.prev.value).toEqual(nodes.a);
   expect(list.tail.next).toEqual(null);
 });
 
 test("should add three nodes", () => {
   const list = new DoublyLinkedList();
-  const firstNode = 1;
-  list.push(firstNode);
-  const secondNode = 2;
-  list.push(secondNode);
-  const thirdNode = 3;
-  list.push(thirdNode);
+  list.push(nodes.a);
+  list.push(nodes.b);
+  list.push(nodes.c);
 
   expect(list.length).toEqual(3);
-  expect(list.head.value).toEqual(firstNode);
-  expect(list.tail.prev.value).toEqual(secondNode);
-  expect(list.tail.value).toEqual(thirdNode);
+  expect(list.head.value).toEqual(nodes.a);
+  expect(list.tail.prev.value).toEqual(nodes.b);
+  expect(list.tail.value).toEqual(nodes.c);
 });
 
 test("should move the tail back", () => {
   const list = new DoublyLinkedList();
-  const firstNode = 1;
-  const secondNode = 2;
-  const thirdNode = 3;
-  list.push(firstNode);
-  list.push(secondNode);
-  list.push(thirdNode);
+  list.push(nodes.a);
+  list.push(nodes.b);
+  list.push(nodes.c);
   list.pop();
 
   expect(list.length).toBe(2);
-  expect(list.tail.value).toBe(secondNode);
-  expect(list.tail.prev.value).toBe(firstNode);
+  expect(list.tail.value).toBe(nodes.b);
+  expect(list.tail.prev.value).toBe(nodes.a);
 });
 
 test("should pop the only node", () => {
   const list = new DoublyLinkedList();
-  const firstNode = 1;
-  list.push(firstNode);
+  list.push(nodes.a);
   list.pop();
 
   expect(list.length).toBe(0);
@@ -77,22 +67,18 @@ test("should pop the only node", () => {
 
 test("should shift the list", () => {
   const list = new DoublyLinkedList();
-  const firstNode = 1;
-  const secondNode = 2;
-  const thirdNode = 3;
-  list.push(firstNode);
-  list.push(secondNode);
-  list.push(thirdNode);
+  list.push(nodes.a);
+  list.push(nodes.b);
+  list.push(nodes.c);
   list.shift();
 
   expect(list.length).toBe(2);
-  expect(list.head.value).toBe(secondNode);
+  expect(list.head.value).toBe(nodes.b);
 });
 
 test("should shift the single node", () => {
   const list = new DoublyLinkedList();
-  const firstNode = 1;
-  list.push(firstNode);
+  list.push(nodes.a);
   list.shift();
 
   expect(list.length).toBe(0);
@@ -138,46 +124,45 @@ describe("unshift", () => {
   });
 });
 
-// test("should get a correct node", () => {
-//   const list = new DoublyLinkedList();
-//   const firstNode = 1;
-//   list.push(firstNode);
-//   const secondNode = 2;
-//   list.push(secondNode);
-//   const thirdNode = 3;
-//   list.push(thirdNode);
-//   const fourthNode = 4;
-//   list.push(fourthNode);
+describe("get", () => {
+  it("it returns a correct node", () => {
+    const list = new DoublyLinkedList();
+    list.push(nodes.a);
+    list.push(nodes.b);
+    list.push(nodes.c);
+    list.push(nodes.d);
 
-//   expect(list.length).toBe(4);
-//   expect(list.get(-1)).toBe(null);
-//   expect(list.get(4)).toBe(null);
-//   expect(list.get(0).value).toBe(firstNode);
-//   expect(list.get(3).value).toBe(fourthNode);
-// });
+    expect(list.length).toBe(4);
+    expect(list.get(-1)).toBe(null);
+    expect(list.get(4)).toBe(null);
+    expect(list.get(0).value).toBe(nodes.a);
+    expect(list.get(2).value).toBe(nodes.c);
+    expect(list.get(3).value).toBe(nodes.d);
+  });
+});
 
 // test("should set a correct node", () => {
 //   const list = new DoublyLinkedList();
-//   const firstNode = 1;
-//   const secondNode = 2;
-//   const thirdNode = 3;
-//   const newSecondNode = 4;
-//   list.push(firstNode);
-//   list.push(secondNode);
-//   list.push(thirdNode);
-//   list.set(newSecondNode, 1);
+//   const nodes.a = 1;
+//   const nodes.b = 2;
+//   const nodes.c = 3;
+//   const newnodes.b = 4;
+//   list.push(nodes.a);
+//   list.push(nodes.b);
+//   list.push(nodes.c);
+//   list.set(newnodes.b, 1);
 
-//   expect(list.get(1).value).toBe(newSecondNode);
+//   expect(list.get(1).value).toBe(newnodes.b);
 // });
 
 // test("shouldn't set a node if index not exist", () => {
 //   const list = new DoublyLinkedList();
-//   const firstNode = 1;
-//   const secondNode = 2;
-//   const thirdNode = 3;
-//   list.push(firstNode);
-//   list.push(secondNode);
-//   list.set(thirdNode, 2);
+//   const nodes.a = 1;
+//   const nodes.b = 2;
+//   const nodes.c = 3;
+//   list.push(nodes.a);
+//   list.push(nodes.b);
+//   list.set(nodes.c, 2);
 
 //   expect(list.get(2)).toBe(null);
 // });
