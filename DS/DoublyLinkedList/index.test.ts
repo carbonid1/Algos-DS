@@ -258,38 +258,36 @@ describe("Doubly Linked List", () => {
     });
   });
 
-  // it("should reverse the list", () => {
-  //   const list = new DoublyLinkedList();
-  //   const xyz = "xyz";
-  //   const hello = "hello";
-  //   const nodes.b = "nodes.b";
-  //   const nodes.a = "nodes.a";
-  //   list.push(xyz);
-  //   list.push(hello);
-  //   list.push(nodes.b);
-  //   list.push(nodes.a);
-  //   list.reverse();
+  describe("reverse", () => {
+    it("reverses the list", () => {
+      const list = new DoublyLinkedList();
+      list.push(nodes.c);
+      list.push(nodes.d);
+      list.push(nodes.b);
+      list.push(nodes.a);
+      list.reverse();
 
-  //   expect(list.get(0).value).toBe(nodes.a);
-  //   expect(list.get(1).value).toBe(nodes.b);
-  //   expect(list.get(2).value).toBe(hello);
-  //   expect(list.get(3).value).toBe(xyz);
-  //   expect(list.get(3).next).toBe(null);
-  // });
+      expect(list.get(0).prev).toBe(null);
+      expect(list.get(0).value).toBe(nodes.a);
+      expect(list.get(1).value).toBe(nodes.b);
+      expect(list.get(2).value).toBe(nodes.d);
+      expect(list.get(3).value).toBe(nodes.c);
+      expect(list.get(3).next).toBe(null);
+    });
 
-  // it("should reverse the list with a single item", () => {
-  //   const list = new DoublyLinkedList();
-  //   const xyz = "xyz";
-  //   list.push(xyz);
-  //   list.reverse();
+    it("reverses the list with a single item", () => {
+      const list = new DoublyLinkedList();
+      list.push(nodes.c);
+      list.reverse();
 
-  //   expect(list.get(0).value).toBe(xyz);
-  // });
+      expect(list.get(0).value).toBe(nodes.c);
+    });
 
-  // it("should reverse an empty list", () => {
-  //   const list = new DoublyLinkedList();
-  //   list.reverse();
+    it("reverses an empty list", () => {
+      const list = new DoublyLinkedList();
+      list.reverse();
 
-  //   expect(list.length).toBe(0);
-  // });
+      expect(list.length).toBe(0);
+    });
+  });
 });

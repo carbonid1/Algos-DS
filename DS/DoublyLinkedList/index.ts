@@ -151,14 +151,16 @@ export class DoublyLinkedList {
   }
 
   reverse() {
+    if (this.length === 0) return;
     const prevHead = this.head;
     const prevTail = this.tail;
-    // this.tail = { value: prevHead?.value, next: null };
-    // this.head = { value: prevTail?.value, next: this.tail };
+    this.tail = { value: prevHead.value, next: null, prev: this.head };
+    this.head = { value: prevTail.value, next: this.tail, prev: null };
 
-    let node = prevHead?.next;
+    let node = prevHead.next;
     while (node?.next) {
-      // this.head.next = { value: node.value, next: this.head.next };
+      this.head.next = { value: node.value, next: this.head.next, prev: this.head };
+      this.head.next.next.prev = this.head.next;
       node = node.next;
     }
   }
