@@ -41,35 +41,37 @@ export class DoublyLinkedList {
   pop() {
     if (this.length === 0) return;
 
-    let node = this.head;
+    let oldTail = this.tail;
 
     if (this.length === 1) {
       this.head = null;
       this.tail = null;
     } else {
-      while (node.next.next) node = node.next;
-      node.next = null;
-      this.tail = node;
+      this.tail = oldTail.prev;
+      oldTail.prev = null;
     }
 
     this.length--;
 
-    return node.value;
+    return oldTail.value;
   }
 
   shift() {
     if (this.length === 0) return;
 
-    const node = this.head;
+    const oldHead = this.head;
 
     if (this.head === this.tail) {
       this.tail = null;
       this.head = null;
-    } else this.head = node.next;
+    } else {
+      this.head = oldHead.next;
+      oldHead.next = null;
+    }
 
     this.length--;
 
-    return node.value;
+    return oldHead.value;
   }
 
   unshift(value) {

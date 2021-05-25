@@ -73,30 +73,30 @@ test("should pop the only node", () => {
   expect(list.head).toBe(null);
 });
 
-// test("should move the head forward", () => {
-//   const list = new DoublyLinkedList();
-//   const firstNode = 1;
-//   list.push(firstNode);
-//   const secondNode = 2;
-//   list.push(secondNode);
-//   const thirdNode = 3;
-//   list.push(thirdNode);
-//   list.shift();
+test("should shift the list", () => {
+  const list = new DoublyLinkedList();
+  const firstNode = 1;
+  const secondNode = 2;
+  const thirdNode = 3;
+  list.push(firstNode);
+  list.push(secondNode);
+  list.push(thirdNode);
+  list.shift();
 
-//   expect(list.length).toBe(2);
-//   expect(list.head.value).toBe(secondNode);
-// });
+  expect(list.length).toBe(2);
+  expect(list.head.value).toBe(secondNode);
+});
 
-// test("should shift the single node", () => {
-//   const list = new DoublyLinkedList();
-//   const firstNode = 1;
-//   list.push(firstNode);
-//   list.shift();
+test("should shift the single node", () => {
+  const list = new DoublyLinkedList();
+  const firstNode = 1;
+  list.push(firstNode);
+  list.shift();
 
-//   expect(list.length).toBe(0);
-//   expect(list.head).toBe(null);
-//   expect(list.tail).toBe(null);
-// });
+  expect(list.length).toBe(0);
+  expect(list.head).toBe(null);
+  expect(list.tail).toBe(null);
+});
 
 // test("should unshift a single node", () => {
 //   const list = new DoublyLinkedList();
