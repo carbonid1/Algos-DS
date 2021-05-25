@@ -137,11 +137,15 @@ export class DoublyLinkedList {
   remove(index: number): ListNode["value"] | null {
     if (index < 0 || index >= this.length) return null;
     else if (index === 0) return this.shift();
+    else if (index === this.length - 1) return this.pop();
     else {
-      const prevNode = this.get(index - 1);
-      const nodeToRemove = prevNode.next;
-      prevNode.next = nodeToRemove.next;
+      const nodeToRemove = this.get(index);
+      nodeToRemove.prev.next = nodeToRemove.next;
+      nodeToRemove.next.prev = nodeToRemove.prev;
       this.length--;
+
+      nodeToRemove.next = null;
+      nodeToRemove.prev = null;
       return nodeToRemove.value;
     }
   }
