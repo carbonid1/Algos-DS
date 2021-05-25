@@ -25,17 +25,18 @@ export class DoublyLinkedList {
     return new ListNode(value);
   }
 
-  // push(value) {
-  //   const node = this.createNode(value);
+  push(value) {
+    const node = this.createNode(value);
+    node.prev = this.tail;
 
-  //   if (this.head === null) this.head = node;
-  //   else this.tail.next = node;
+    if (this.head === null) this.head = node;
+    else this.tail.next = node;
 
-  //   this.tail = node;
-  //   this.length++;
+    this.tail = node;
+    this.length++;
 
-  //   return this;
-  // }
+    return this;
+  }
 
   // pop() {
   //   if (this.length === 0) return;
