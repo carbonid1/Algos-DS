@@ -47,30 +47,31 @@ test("should add three nodes", () => {
   expect(list.tail.value).toEqual(thirdNode);
 });
 
-// test("should move the tail back", () => {
-//   const list = new DoublyLinkedList();
-//   const firstNode = 1;
-//   list.push(firstNode);
-//   const secondNode = 2;
-//   list.push(secondNode);
-//   const thirdNode = 3;
-//   list.push(thirdNode);
-//   list.pop();
+test("should move the tail back", () => {
+  const list = new DoublyLinkedList();
+  const firstNode = 1;
+  const secondNode = 2;
+  const thirdNode = 3;
+  list.push(firstNode);
+  list.push(secondNode);
+  list.push(thirdNode);
+  list.pop();
 
-//   expect(list.length).toBe(2);
-//   expect(list.tail.value).toBe(secondNode);
-// });
+  expect(list.length).toBe(2);
+  expect(list.tail.value).toBe(secondNode);
+  expect(list.tail.prev.value).toBe(firstNode);
+});
 
-// test("should pop the last node", () => {
-//   const list = new DoublyLinkedList();
-//   const firstNode = 1;
-//   list.push(firstNode);
-//   list.pop();
+test("should pop the only node", () => {
+  const list = new DoublyLinkedList();
+  const firstNode = 1;
+  list.push(firstNode);
+  list.pop();
 
-//   expect(list.length).toBe(0);
-//   expect(list.tail).toBe(null);
-//   expect(list.head).toBe(null);
-// });
+  expect(list.length).toBe(0);
+  expect(list.tail).toBe(null);
+  expect(list.head).toBe(null);
+});
 
 // test("should move the head forward", () => {
 //   const list = new DoublyLinkedList();
