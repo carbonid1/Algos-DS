@@ -2,8 +2,8 @@ import { Stack } from "./index";
 
 const nodes = { a: "A", b: "B", c: "C", d: "D" };
 
-describe("Doubly Linked List", () => {
-  it("should create a list", () => {
+describe("Stack", () => {
+  it("should create a stack", () => {
     const list = new Stack();
 
     expect(list.head).toEqual(null);
