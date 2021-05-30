@@ -22,7 +22,8 @@ export class BinarySearchTree {
   }
 
   private assignNewNode(newNode: BSTNode, oldNode: BSTNode) {
-    if (oldNode.value < newNode.value) {
+    if (oldNode.value === newNode.value) return null;
+    else if (oldNode.value < newNode.value) {
       if (oldNode.right === null) oldNode.right = newNode;
       else this.assignNewNode(newNode, oldNode.right);
     } else if (oldNode.value > newNode.value) {
