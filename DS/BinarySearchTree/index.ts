@@ -32,10 +32,22 @@ export class BinarySearchTree {
     }
   }
 
+  private _find(value: BSTNode["value"], currentNode: BSTNode): BSTNode | null {
+    if (currentNode === null) return null;
+    else if (currentNode.value < value) return this._find(value, currentNode.right);
+    else if (currentNode.value > value) return this._find(value, currentNode.left);
+    else return currentNode;
+  }
+
   insert(value: BSTNode["value"]) {
     const node = this.createNode(value);
     if (this.root === null) this.root = node;
     else this.assignNewNode(node, this.root);
     return this;
+  }
+
+  find(value: BSTNode["value"]): BSTNode | null {
+    if (this.root === null) return null;
+    else return this._find(value, this.root);
   }
 }
