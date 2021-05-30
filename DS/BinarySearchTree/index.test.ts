@@ -68,4 +68,27 @@ describe("Binary Search Tree", () => {
       });
     });
   });
+
+  describe("Breadth First Search", () => {
+    it("returns an empty array if the tree is empty", () => {
+      const bst = new BinarySearchTree();
+
+      expect(bst.bfs()).toEqual([]);
+    });
+
+    it("returns an array of bfs ordered values", () => {
+      //        3(c)
+      //    2(b)  4(d)
+      //  1(a)  5(e) 6(f)
+      const bst = new BinarySearchTree();
+      bst.insert(nodes.c);
+      bst.insert(nodes.d);
+      bst.insert(nodes.b);
+      bst.insert(nodes.a);
+      bst.insert(nodes.e);
+      bst.insert(nodes.f);
+
+      expect(bst.bfs()).toEqual([3, 2, 4, 1, 5, 6]);
+    });
+  });
 });

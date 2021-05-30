@@ -1,8 +1,8 @@
 // FIFO: first in first out
 
-class ListNode {
-  value: number;
-  next: ListNode;
+class ListNode<T = any> {
+  value: T;
+  next: ListNode<T>;
 
   constructor(value) {
     this.value = value;
@@ -10,9 +10,9 @@ class ListNode {
   }
 }
 
-export class Queue {
-  head: ListNode;
-  tail: ListNode;
+export class Queue<T> {
+  head: ListNode<T> | null;
+  tail: ListNode<T> | null;
   length: number;
 
   constructor() {
@@ -25,7 +25,7 @@ export class Queue {
     return new ListNode(value);
   }
 
-  dequeue() {
+  dequeue(): T {
     if (this.length === 0) return;
 
     const node = this.head;
@@ -40,7 +40,7 @@ export class Queue {
     return node.value;
   }
 
-  enqueue(value) {
+  enqueue(value: T) {
     const node = this.createNode(value);
 
     if (this.head === null) this.head = node;

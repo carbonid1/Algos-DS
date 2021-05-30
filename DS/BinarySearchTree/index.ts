@@ -1,23 +1,25 @@
-class BSTNode {
-  value: number;
-  left: BSTNode | null;
-  right: BSTNode | null;
+import { Queue } from "../Queue";
 
-  constructor(value: BSTNode["value"]) {
+class BSTNode<T = any> {
+  value: T;
+  left: BSTNode<T> | null;
+  right: BSTNode<T> | null;
+
+  constructor(value: T) {
     this.value = value;
     this.left = null;
     this.right = null;
   }
 }
 
-export class BinarySearchTree {
-  root: BSTNode | null;
+export class BinarySearchTree<T> {
+  root: BSTNode<T> | null;
 
   constructor() {
     this.root = null;
   }
 
-  private createNode(value: BSTNode["value"]) {
+  private createNode(value: T) {
     return new BSTNode(value);
   }
 
@@ -32,22 +34,42 @@ export class BinarySearchTree {
     }
   }
 
-  private _find(value: BSTNode["value"], currentNode: BSTNode): BSTNode | null {
-    if (currentNode === null) return null;
-    else if (currentNode.value < value) return this._find(value, currentNode.right);
-    else if (currentNode.value > value) return this._find(value, currentNode.left);
-    else return currentNode;
-  }
-
-  insert(value: BSTNode["value"]) {
+  insert(value: T) {
     const node = this.createNode(value);
     if (this.root === null) this.root = node;
     else this.assignNewNode(node, this.root);
     return this;
   }
 
-  find(value: BSTNode["value"]): BSTNode | null {
+  private _find(value: T, currentNode: BSTNode): BSTNode | null {
+    if (currentNode === null) return null;
+    else if (currentNode.value < value) return this._find(value, currentNode.right);
+    else if (currentNode.value > value) return this._find(value, currentNode.left);
+    else return currentNode;
+  }
+
+  find(value: T): BSTNode | null {
     if (this.root === null) return null;
     else return this._find(value, this.root);
+  }
+
+  private _bfs(values: T[], queue: Queue<BSTNode>): typeof values {
+    if (queue.length === 0) return values;
+    else {
+      const node = queue.dequeue();
+      if (node.left) queue.enqueue(node.left);
+      if (node.right) queue.enqueue(node.right);
+      values.push(node.value);
+      return this._bfs(values, queue);
+    }
+  }
+
+  // Breadth First Search
+  // Bottom -> Down, Left -> Right
+  bfs(): T[] {
+    if (this.root === null) return [];
+    const queue = new Queue<BSTNode>();
+    queue.enqueue(this.root);
+    return this._bfs([], queue);
   }
 }
