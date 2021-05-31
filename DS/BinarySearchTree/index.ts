@@ -85,12 +85,26 @@ export class BinarySearchTree<T> {
     }
   }
 
-  // Depth First PreOrder Search
+  // Depth First Pre Order Search
   // Top -> Left -> Bottom -> Right
   dFPreOrderS(): T[] {
     if (this.root === null) return [];
     const stack = new Stack<BSTNode>();
     stack.push(this.root);
     return this._dFPreOrderS([], stack);
+  }
+
+  private _dFPostOrderS(node: BSTNode, values: T[]): typeof values {
+    if (node.left) this._dFPostOrderS(node.left, values);
+    if (node.right) this._dFPostOrderS(node.right, values);
+    values.push(node.value);
+    return values;
+  }
+
+  // Depth First Post Order Search
+  // Bottom -> Left -> Right -> Top
+  dFPostOrderS(): T[] {
+    if (this.root === null) return [];
+    return this._dFPostOrderS(this.root, []);
   }
 }
