@@ -137,4 +137,27 @@ describe("Binary Search Tree", () => {
       expect(bst.dFPostOrderS()).toEqual([nodes.a, nodes.b, nodes.f, nodes.e, nodes.d, nodes.c]);
     });
   });
+
+  describe("Depth First In Order Search", () => {
+    it("returns an empty array if the tree is empty", () => {
+      const bst = new BinarySearchTree();
+
+      expect(bst.dFPostOrderS()).toEqual([]);
+    });
+
+    it("returns the ordered values", () => {
+      //        3(c)
+      //    2(b)    4(d)
+      //  1(a)   3.5(f) 5(e)
+      const bst = new BinarySearchTree();
+      bst.insert(nodes.c);
+      bst.insert(nodes.d);
+      bst.insert(nodes.b);
+      bst.insert(nodes.a);
+      bst.insert(nodes.e);
+      bst.insert(nodes.f);
+
+      expect(bst.dFInOrderS()).toEqual([nodes.a, nodes.b, nodes.c, nodes.f, nodes.d, nodes.e]);
+    });
+  });
 });

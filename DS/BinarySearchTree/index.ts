@@ -107,4 +107,18 @@ export class BinarySearchTree<T> {
     if (this.root === null) return [];
     return this._dFPostOrderS(this.root, []);
   }
+
+  private _dFInOrderS(node: BSTNode, values: T[]): typeof values {
+    if (node.left) this._dFInOrderS(node.left, values);
+    values.push(node.value);
+    if (node.right) this._dFInOrderS(node.right, values);
+    return values;
+  }
+
+  // Depth First In Order Search
+  // Bottom -> Left -> Top -> Right
+  dFInOrderS(): T[] {
+    if (this.root === null) return [];
+    return this._dFInOrderS(this.root, []);
+  }
 }
