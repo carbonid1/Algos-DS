@@ -1,17 +1,17 @@
 // LIFO: last in first out
 
-class ListNode {
-  value: number;
-  next: ListNode;
+class ListNode<T = number> {
+  value: T;
+  next: ListNode<T>;
 
-  constructor(value) {
+  constructor(value: T) {
     this.value = value;
     this.next = null;
   }
 }
 
-export class Stack {
-  head: ListNode;
+export class Stack<T> {
+  head: ListNode<T>;
   length: number;
 
   constructor() {
@@ -19,7 +19,7 @@ export class Stack {
     this.length = 0;
   }
 
-  private createNode(value) {
+  private createNode(value: T) {
     return new ListNode(value);
   }
 
@@ -32,7 +32,7 @@ export class Stack {
     return node.value;
   }
 
-  push(value) {
+  push(value: T) {
     const node = this.createNode(value);
     node.next = this.head;
     this.head = node;

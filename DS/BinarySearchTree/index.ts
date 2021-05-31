@@ -1,4 +1,5 @@
 import { Queue } from "../Queue";
+import { Stack } from "../Stack";
 
 class BSTNode<T = any> {
   value: T;
@@ -65,11 +66,31 @@ export class BinarySearchTree<T> {
   }
 
   // Breadth First Search
-  // Bottom -> Down, Left -> Right
+  // Top -> Left -> Right -> Bottom
   bfs(): T[] {
     if (this.root === null) return [];
     const queue = new Queue<BSTNode>();
     queue.enqueue(this.root);
     return this._bfs([], queue);
+  }
+
+  private _dFPreOrderS(values: T[], stack: Stack<BSTNode>): typeof values {
+    if (stack.length === 0) return values;
+    else {
+      const node = stack.pop();
+      if (node.right) stack.push(node.right);
+      if (node.left) stack.push(node.left);
+      values.push(node.value);
+      return this._dFPreOrderS(values, stack);
+    }
+  }
+
+  // Depth First PreOrder Search
+  // Top -> Left -> Bottom -> Right
+  dFPreOrderS(): T[] {
+    if (this.root === null) return [];
+    const stack = new Stack<BSTNode>();
+    stack.push(this.root);
+    return this._dFPreOrderS([], stack);
   }
 }
