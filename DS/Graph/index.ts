@@ -1,6 +1,7 @@
+import { Queue } from "../Queue";
+
 // vertex === node
 // edge === conncetion
-
 export class Graph<T = Symbol> {
   private list: Map<T, T[]>;
 
@@ -57,5 +58,31 @@ export class Graph<T = Symbol> {
     map.set(vertex, true);
     const traversedList: T[] = [vertex];
     return this._dfs(map, traversedList);
+  }
+
+  private _bfs(map: Map<T, true>, traversedList: T[], queue: Queue<T>): T[] {
+    const vertex = queue.dequeue();
+    traversedList.push(vertex);
+    const edges = this.list.get(vertex);
+
+    edges?.forEach((vertex) => {
+      if (!map.has(vertex)) {
+        map.set(vertex, true);
+        queue.enqueue(vertex);
+      }
+    });
+
+    if (queue.length) return this._bfs(map, traversedList, queue);
+    else return traversedList;
+  }
+
+  bfs(vertex: T): T[] {
+    if (!this.list.has(vertex)) return [];
+    const map: Map<T, true> = new Map();
+    const queue = new Queue<T>();
+    const traversedList: T[] = [];
+    map.set(vertex, true);
+    queue.enqueue(vertex);
+    return this._bfs(map, traversedList, queue);
   }
 }
