@@ -38,4 +38,24 @@ export class Graph<T = Symbol> {
     edges.forEach((edgeVertex) => this.removeEdge(edgeVertex, vertex));
     this.list.delete(vertex);
   }
+
+  private _dfs(map: Map<T, true>, traversedList: T[]): T[] {
+    const edges = this.list.get(traversedList[traversedList.length - 1]);
+    edges?.forEach((vertex) => {
+      if (!map.has(vertex)) {
+        map.set(vertex, true);
+        traversedList.push(vertex);
+        this._dfs(map, traversedList);
+      }
+    });
+    return traversedList;
+  }
+
+  dfs(vertex: T): T[] {
+    if (!this.list.has(vertex)) return [];
+    const map: Map<T, true> = new Map();
+    map.set(vertex, true);
+    const traversedList: T[] = [vertex];
+    return this._dfs(map, traversedList);
+  }
 }
