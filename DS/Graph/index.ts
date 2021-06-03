@@ -2,8 +2,8 @@ import { Queue } from "../Queue";
 
 // vertex === node
 // edge === conncetion
-export class Graph<T = Symbol> {
-  private list: Map<T, T[]>;
+export class Graph<T = Symbol, W = number> {
+  private list: Map<T, { vertex: T; weight: W }[]>;
 
   constructor() {
     this.list = new Map();
@@ -13,19 +13,19 @@ export class Graph<T = Symbol> {
     if (!this.list.has(vertex)) this.list.set(vertex, []);
   }
 
-  private addEdge(vertex1: T, vertex2: T) {
+  private addEdge(vertex1: T, vertex2: T, weight: W) {
     this.addVertex(vertex1);
-    this.list.get(vertex1)?.push(vertex2);
+    this.list.get(vertex1)?.push({ vertex: vertex2, weight });
   }
 
-  addEdges(vertex1: T, vertex2: T) {
-    this.addEdge(vertex1, vertex2);
-    this.addEdge(vertex2, vertex1);
+  addEdges(vertex1: T, vertex2: T, weight: W) {
+    this.addEdge(vertex1, vertex2, weight);
+    this.addEdge(vertex2, vertex1, weight);
   }
 
   private removeEdge(vertex1: T, vertex2: T) {
     const keyValues = this.list.get(vertex1) ?? [];
-    const filteredValues = keyValues.filter((vertex) => vertex !== vertex2);
+    const filteredValues = keyValues.filter(({ vertex }) => vertex !== vertex2);
     this.list.set(vertex1, filteredValues);
   }
 
@@ -36,13 +36,13 @@ export class Graph<T = Symbol> {
 
   removeVertex(vertex: T) {
     const edges = this.list.get(vertex) ?? [];
-    edges.forEach((edgeVertex) => this.removeEdge(edgeVertex, vertex));
+    edges.forEach(({ vertex: edgeVertex }) => this.removeEdge(edgeVertex, vertex));
     this.list.delete(vertex);
   }
 
   private _dfs(map: Map<T, true>, traversedList: T[]): T[] {
     const edges = this.list.get(traversedList[traversedList.length - 1]);
-    edges?.forEach((vertex) => {
+    edges?.forEach(({ vertex }) => {
       if (!map.has(vertex)) {
         map.set(vertex, true);
         traversedList.push(vertex);
@@ -65,7 +65,7 @@ export class Graph<T = Symbol> {
     traversedList.push(vertex);
     const edges = this.list.get(vertex);
 
-    edges?.forEach((vertex) => {
+    edges?.forEach(({ vertex }) => {
       if (!map.has(vertex)) {
         map.set(vertex, true);
         queue.enqueue(vertex);

@@ -19,13 +19,13 @@ describe("Graph", () => {
       const E = Symbol("E");
       const F = Symbol("F");
       const graph = new Graph();
-      graph.addEdges(A, B);
-      graph.addEdges(A, C);
-      graph.addEdges(B, D);
-      graph.addEdges(C, E);
-      graph.addEdges(D, E);
-      graph.addEdges(D, F);
-      graph.addEdges(E, F);
+      graph.addEdges(A, B, 0);
+      graph.addEdges(A, C, 0);
+      graph.addEdges(B, D, 0);
+      graph.addEdges(C, E, 0);
+      graph.addEdges(D, E, 0);
+      graph.addEdges(D, F, 0);
+      graph.addEdges(E, F, 0);
 
       expect(graph.dfs(A)).toEqual([A, B, D, E, C, F]);
     });
@@ -50,14 +50,14 @@ describe("Graph", () => {
       const F = Symbol("F");
       const G = Symbol("G");
       const graph = new Graph();
-      graph.addEdges(A, B);
-      graph.addEdges(A, E);
-      graph.addEdges(B, C);
-      graph.addEdges(C, D);
-      graph.addEdges(D, E);
-      graph.addEdges(D, F);
-      graph.addEdges(E, F);
-      graph.addEdges(A, G);
+      graph.addEdges(A, B, 0);
+      graph.addEdges(A, E, 0);
+      graph.addEdges(B, C, 0);
+      graph.addEdges(C, D, 0);
+      graph.addEdges(D, E, 0);
+      graph.addEdges(D, F, 0);
+      graph.addEdges(E, F, 0);
+      graph.addEdges(A, G, 0);
 
       expect(graph.bfs(A)).toEqual([A, B, E, G, C, D, F]);
     });
